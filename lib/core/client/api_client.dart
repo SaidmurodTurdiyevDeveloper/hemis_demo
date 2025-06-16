@@ -33,13 +33,16 @@ class ApiClient extends ClientApi {
   @override
   Future<ApiClientModel> get({required String path, Map<String, dynamic>? query}) async {
     try {
+
       final request = await _dio.get(path, queryParameters: query);
+
       final int statusCode = request.statusCode ?? 500;
       if (statusCode >= 200 && statusCode < 300) {
         return ApiClientModel(result: request.data, success: true, code: statusCode, error: null);
       }
       return ApiClientModel(result: request.data, success: false, code: statusCode, error: FailureType.network);
     } on DioException catch (e) {
+
       return ApiClientModel(result: e.message, success: false, code: e.response?.statusCode, error: FailureType.server);
     }
   }

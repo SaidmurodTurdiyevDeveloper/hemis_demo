@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hemis_demo/features/main/presenter/main_tab/subject_tab/subjects_cubit.dart';
+
 import '../../../../../core/navigator/Screens.dart';
 import '../../../../../core/navigator/navigators.dart';
 import '../../../data/model/response/student_subjects_with_result.dart';
@@ -9,11 +10,11 @@ import '../../widget/semester_drop_down.dart';
 
 class Subject {
   final String title;
-  final String meta; // "Tayyor | 128 soat | 4 kredit"
+  final String meta;
   final int score;
   final int maxScore;
-  final Color color; // progress + status rang
-  final String statusLabel; // "Umumiy ball", "Yopiq", va h.k.
+  final Color color;
+  final String statusLabel;
 
   const Subject({
     required this.title,
@@ -48,7 +49,7 @@ class SubjectsPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade400, width: .7), borderRadius: BorderRadius.circular(8)),
                         child: SemesterDropdown(
-                          selected: 1,
+                          selected: state.semester,
                           onSelect: (v) {
                             context.read<SubjectsCubit>().getSubjectSemester(v);
                           },

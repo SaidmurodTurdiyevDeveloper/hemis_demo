@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
     return Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
             child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),

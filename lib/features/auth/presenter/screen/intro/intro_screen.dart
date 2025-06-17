@@ -29,6 +29,7 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: BlocListener<IntroCubit, IntroState>(
           listener: (context, state) {

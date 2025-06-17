@@ -15,6 +15,7 @@ class ChooseUniversityScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: BlocListener<ChooseUniversityCubit, ChooseUniversityState>(
         listener: (context, state) {
           if (state.openedScreen != null && state.openedScreen?.isNotEmpty==true) {
@@ -130,7 +131,7 @@ class ChooseUniversityScreen extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                             decoration: BoxDecoration(
-                              color: Colors.grey[100],
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                   color: state.selected == uni ? const Color(0xFF546CE3) : Colors.transparent,

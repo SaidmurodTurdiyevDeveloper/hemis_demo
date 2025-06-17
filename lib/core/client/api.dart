@@ -5,6 +5,8 @@ class Api {
   static const String refreshToken = "$baseUrl/v1/auth/refresh-token";
 
   static const String mobileUniversity = "$baseUrl/v1/public/university-api-urls";
+
+  static const String student = "$baseUrl/v1/account/me";
 //barcha fanlari
   static String studentSubject(String semester) => "$baseUrl/v1/education/subjects?_semester=$semester";
   //fann natijalari

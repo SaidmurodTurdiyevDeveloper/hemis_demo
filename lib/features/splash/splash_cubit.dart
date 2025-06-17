@@ -29,7 +29,7 @@ class SplashCubit extends Cubit<SplashState> {
       } else if (isRememberedUser) {
         emit(SplashOpenScreen(Screens.home));
       } else {
-        emit(SplashOpenScreen(Screens.home));
+        emit(SplashOpenScreen(Screens.login));
       }
     }
   }

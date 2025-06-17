@@ -56,9 +56,9 @@ class _BottomNav extends StatelessWidget {
       destinations: const [
         NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Asosy',),
         NavigationDestination(icon: Icon(Icons.calendar_month_outlined), label: 'Dars jadvali'),
-        NavigationDestination(icon: Icon(Icons.fact_check_outlined), label: 'Fanlar'),
-        NavigationDestination(icon: Icon(Icons.favorite_border), label: 'Foydali'),
-        NavigationDestination(icon: Icon(Icons.person_outline), label: 'Profil'),
+        NavigationDestination(icon: Icon(Icons.subject_outlined), label: 'Fanlar'),
+        NavigationDestination(icon: Icon(Icons.more_horiz_outlined), label: 'Foydali'),
+        NavigationDestination(icon: Icon(Icons.person), label: 'Profil'),
       ],
     );
   }

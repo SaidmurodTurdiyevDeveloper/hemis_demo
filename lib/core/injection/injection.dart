@@ -42,7 +42,10 @@ Future<void> _injectRepositories() async {
           getIt.get<ClientApi>(),
           getIt.get<LocalStorage>()
       ));
-  getIt.registerLazySingleton<StudentRepository>(() => StudentRepositoryImpl());
+  getIt.registerLazySingleton<StudentRepository>(() => StudentRepositoryImpl(
+      getIt.get<ClientApi>(),
+      getIt.get<LocalStorage>()
+  ));
 }
 
 Future<void> _injectUseCases() async {

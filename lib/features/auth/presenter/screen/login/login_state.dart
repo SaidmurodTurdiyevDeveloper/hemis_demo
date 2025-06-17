@@ -2,7 +2,9 @@ part of 'login_cubit.dart';
 
 class LoginState extends Equatable {
   final String studentId;
+  final String? studentIdError;
   final String password;
+  final String? passwordError;
   final bool rememberMe;
   final bool obscurePassword;
   final bool submitting;
@@ -11,7 +13,9 @@ class LoginState extends Equatable {
 
   const LoginState({
     this.studentId = '',
+    this.studentIdError,
     this.password = '',
+    this.passwordError,
     this.newScreen,
     this.rememberMe = false,
     this.obscurePassword = true,
@@ -19,11 +23,13 @@ class LoginState extends Equatable {
     this.error,
   });
 
-  bool get isValid => studentId.isNotEmpty && password.isNotEmpty && password.length > 6;
+  bool get isValid => studentIdError==null && passwordError==null;
 
   LoginState copyWith({
     String? studentId,
+    String? studentIdError,
     String? password,
+    String? passwordError,
     String? newScreen,
     bool? rememberMe,
     bool? obscurePassword,
@@ -31,7 +37,9 @@ class LoginState extends Equatable {
     Failure? error,
   }) => LoginState(
     studentId: studentId ?? this.studentId,
+    studentIdError: studentIdError,
     password: password ?? this.password,
+    passwordError: passwordError ,
     newScreen: newScreen ?? this.newScreen,
     rememberMe: rememberMe ?? this.rememberMe,
     obscurePassword: obscurePassword ?? this.obscurePassword,
@@ -40,5 +48,5 @@ class LoginState extends Equatable {
   );
 
   @override
-  List<Object?> get props => [studentId, password, rememberMe, newScreen, obscurePassword, submitting, error];
+  List<Object?> get props => [studentId,studentIdError, password,passwordError ,obscurePassword,rememberMe, newScreen, submitting, error];
 }

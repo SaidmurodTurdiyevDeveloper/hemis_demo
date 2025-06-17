@@ -13,16 +13,20 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(const LoginState());
   final _useCase = getIt<LoginUseCase>();
 
-  void studentIdChanged(String v) => emit(state.copyWith(studentId: v, error: null));
+  void studentIdChanged(String v) => emit(state.copyWith(studentId: v, error: null, studentIdError: null));
 
-  void passwordChanged(String v) => emit(state.copyWith(password: v, error: null));
+  void studentIdChangedError(String? v) => emit(state.copyWith(studentIdError: v));
+
+  void passwordChanged(String v) => emit(state.copyWith(password: v, error: null, passwordError: null));
 
   void toggleObscure() => emit(state.copyWith(obscurePassword: !state.obscurePassword));
+
+  void passwordChangedError(String? v) => emit(state.copyWith(passwordError: v));
 
   void toggleRememberMe() => emit(state.copyWith(rememberMe: !state.rememberMe));
 
   Future<void> submit() async {
-    if (!state.isValid || state.submitting) return;
+    if (state.submitting) return;
     emit(state.copyWith(submitting: true));
     final result = await _useCase.call(LoginRequest(studentId: state.studentId, password: state.password, rememberMe: state.rememberMe));
     if (result.error != null) {

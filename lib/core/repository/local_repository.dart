@@ -9,13 +9,17 @@ abstract class LocalRepository {
 
   Future<bool> saveId(String studentId);
 
+  Future<String> getId();
+
   Future<bool> savePassword(String password);
+
+  Future<String> getPassword();
 
   Future<bool> getRememberMe();
 
   Future<int> getPinCode();
 
-  Future<bool> savePinCode();
+  Future<bool> savePinCode(int pinCode);
 
   Future<Language?> getLanguage();
 

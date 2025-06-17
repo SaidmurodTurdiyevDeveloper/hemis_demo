@@ -8,5 +8,5 @@ class SavePinCode implements UseCaseFactory<Future<bool>, int> {
   SavePinCode({LocalRepository? repository}) : repository = repository ?? getIt.get<LocalRepository>();
 
   @override
-  Future<bool> call(int params) => repository.saveToken(params.toString());
+  Future<bool> call(int params) => repository.savePinCode(params);
 }

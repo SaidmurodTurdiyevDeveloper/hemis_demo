@@ -16,7 +16,7 @@ class LoginUseCase extends UseCaseFactory<Future<ResponseResult<String>>, LoginR
 
   @override
   Future<ResponseResult<String>> call(LoginRequest param) async {
-    final result = await repository.login(login: int.parse(param.studentId), password: param.password);
+    var result = await repository.login(login: int.parse(param.studentId), password: param.password);
     if (result.result != null) {
       await localRepository.saveRememberMe(param.rememberMe);
       if (param.rememberMe) {

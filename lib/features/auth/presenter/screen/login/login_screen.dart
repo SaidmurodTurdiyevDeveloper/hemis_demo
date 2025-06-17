@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hemis_demo/core/errors/failure.dart';
+import 'package:hemis_demo/core/navigator/Screens.dart';
 import 'package:hemis_demo/core/resource/strings.dart';
 
 import '../../../../../core/navigator/navigators.dart';
@@ -28,7 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 40),
                       Text(AppString.hames(context),
                           style: theme.textTheme.headlineMedium?.copyWith(
                               color: const Color(0xFF546CE3),
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           );
                         },
                       ),
-                      const SizedBox(height: 50)
+                      const SizedBox(height: 10)
                     ]
                 )
             )
@@ -151,6 +151,7 @@ class _PasswordField extends StatelessWidget {
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return TextFormField(
+            obscureText: state.obscurePassword,
             onChanged: context
                 .read<LoginCubit>()
                 .passwordChanged,
@@ -217,7 +218,9 @@ class _RememberAndForgotRow extends StatelessWidget {
                 Text(AppString.rememberMe(context)),
                 const Spacer(),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      appRouter.push(Screens.empty);
+                    },
                     child: Text(
                         AppString.forgotPassword(context),
                         style: TextStyle(color: Color(0xFF546CE3))

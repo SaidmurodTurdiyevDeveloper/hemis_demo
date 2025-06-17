@@ -34,7 +34,37 @@ class PinCodeCubit extends Cubit<PinCodeState> {
 
   void validatePin(String pin) async {
     if (pin.length == 4) {
-
+      if (state.isExist) {
+        var isValid = await _useCase.checkPinCode(int.parse(pin));
+        if (isValid) {
+          await _useCase
+              .updateToken(NoParam())
+              .then((v) {
+                if (v.result == true) {
+                  emit(state.copyWith(isValid: v.result, isLoading: false));
+                } else {
+                  emit(state.copyWith(authError: true, isLoading: false));
+                }
+              })
+              .catchError((error) {
+                emit(state.copyWith(authError: true, isLoading: false));
+              });
+        } else {
+          emit(state.copyWith(errorMessage: 'Pin ko\'d noto\'g\'ri', firstPin: '', pin: '', isLoading: false));
+        }
+      } else {
+        await Future.delayed(Duration(milliseconds: 100));
+        if (state.firstPin.isNotEmpty) {
+          if (state.firstPin == pin) {
+            _useCase.savePinCode(int.parse(pin));
+            emit(state.copyWith(isValid: true, isLoading: false));
+          } else {
+            emit(state.copyWith(errorMessage: 'Pin ko\'dlar bir xil emas', firstPin: '', pin: '', isLoading: false));
+          }
+        } else {
+          emit(state.copyWith(firstPin: pin, pin: '', isLoading: false));
+        }
+      }
     }
   }
 

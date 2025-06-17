@@ -32,7 +32,11 @@ class LoginCubit extends Cubit<LoginState> {
     if (result.error != null) {
       emit(state.copyWith(error: result.error, submitting: false));
     } else {
-      emit(state.copyWith(submitting: false, newScreen: Screens.home));
+      if (state.rememberMe) {
+        emit(state.copyWith(submitting: false, newScreen: Screens.lock));
+      } else {
+        emit(state.copyWith(submitting: false, newScreen: Screens.home));
+      }
     }
   }
 }

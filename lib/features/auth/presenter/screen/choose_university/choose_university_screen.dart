@@ -18,7 +18,7 @@ class ChooseUniversityScreen extends StatelessWidget {
       floatingActionButton: BlocListener<ChooseUniversityCubit, ChooseUniversityState>(
         listener: (context, state) {
           if (state.openedScreen != null && state.openedScreen?.isNotEmpty==true) {
-            appRouter.go(state.openedScreen!);
+            appRouter.push(state.openedScreen!);
           }
         },
         child: FloatingActionButton(

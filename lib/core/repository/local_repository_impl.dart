@@ -28,7 +28,7 @@ class LocalRepositoryImpl extends LocalRepository {
   Future<int> getPinCode() => localStorage.getInt("pinCode");
 
   @override
-  Future<bool> savePinCode() => localStorage.setInt("pinCode", 0);
+  Future<bool> savePinCode(int pinCode) => localStorage.setInt("pinCode", pinCode);
 
   @override
   Future<Language?> getLanguage() async {
@@ -48,4 +48,10 @@ class LocalRepositoryImpl extends LocalRepository {
 
   @override
   Future<bool> savePassword(String password) => localStorage.setString("password", password);
+
+  @override
+  Future<String> getId() => localStorage.getString("studentId");
+
+  @override
+  Future<String> getPassword() => localStorage.getString("password");
 }

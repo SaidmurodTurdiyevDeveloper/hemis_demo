@@ -14,8 +14,15 @@ class PinCodePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<PinCodeCubit, PinCodeState>(
       listener: (context, state) {
-        if (state.isValid) {}
-        if (state.authError) {}
+        if (state.isValid) {
+          appRouter.replace(Screens.home);
+        }
+        if (state.authError) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Internet ulanishini tekshiring!'), backgroundColor:
+          Colors.black45));
+          Future.delayed(Duration(seconds: 1));
+          appRouter.go(Screens.login);
+        }
       },
       builder: (context, state) {
         return Stack(
@@ -55,37 +62,40 @@ class PinCodePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 32.0),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: 1.5),
-                    itemCount: 12,
-                    itemBuilder: (context, index) {
-                      String buttonText = index < 9 ? '${index + 1}' : (index == 9 ? 'DEL' : (index == 10 ? '0' : 'RES'));
-                      return Container(
-                        padding: const EdgeInsets.all(12.0),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF546CE3),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: 1.5),
+                      itemCount: 12,
+                      itemBuilder: (context, index) {
+                        String buttonText = index < 9 ? '${index + 1}' : (index == 9 ? 'DEL' : (index == 10 ? '0' : 'RES'));
+                        return Container(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFF546CE3),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+                            ),
+                            onPressed: () {
+                              if (buttonText == 'DEL') {
+                                context.read<PinCodeCubit>().removeLastDigit();
+                              } else if (buttonText == 'RES') {
+                                context.read<PinCodeCubit>().resetPin();
+                              } else if (buttonText.isNotEmpty) {
+                                context.read<PinCodeCubit>().addDigit(buttonText);
+                              }
+                            },
+                            child:
+                                (buttonText == 'DEL')
+                                    ? SizedBox(width: 32.0, height: 32.0, child: Icon(Icons.backspace, color: Colors.white))
+                                    : (buttonText == 'RES')
+                                    ? SizedBox(width: 32.0, height: 32.0, child: Icon(Icons.replay, color: Colors.white))
+                                    : Text(buttonText, style: GoogleFonts.roboto(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w500)),
                           ),
-                          onPressed: () {
-                            if (buttonText == 'DEL') {
-                              context.read<PinCodeCubit>().removeLastDigit();
-                            } else if (buttonText == 'RES') {
-                              context.read<PinCodeCubit>().resetPin();
-                            } else if (buttonText.isNotEmpty) {
-                              context.read<PinCodeCubit>().addDigit(buttonText);
-                            }
-                          },
-                          child:
-                              (buttonText == 'DEL')
-                                  ? SizedBox(width: 32.0, height: 32.0, child: Icon(Icons.backspace, color: Colors.white))
-                                  : (buttonText == 'RES')
-                                  ? SizedBox(width: 32.0, height: 32.0, child: Icon(Icons.replay, color: Colors.white))
-                                  : Text(buttonText, style: GoogleFonts.roboto(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w500)),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(height: 32.0),
                 ],

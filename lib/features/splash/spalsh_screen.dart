@@ -28,6 +28,6 @@ class SplashScreen extends StatelessWidget {
                 backgroundColor: Color(0xFF344FD5),
                 body: Center(child: Text('Hamis Demo',
                     style: GoogleFonts.roboto(color: Colors.white,
-                        fontSize: 20, fontWeight: FontWeight.bold))))));
+                        fontSize: 28, fontWeight: FontWeight.bold))))));
   }
 }
